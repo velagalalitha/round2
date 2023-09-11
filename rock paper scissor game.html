@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+        }
+
+        #result {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Rock, Paper, Scissors</h1>
+    <center>
+    <div style="float: left;">
+    <button id="rock">Rock<br><img src="1.jfif"></button>
+    </div>
+    <div style="float: left;">
+    <button id="paper">Paper <br><img src="2.png"></button>
+    </div>
+    <div style="float: left;">
+    <button id="scissors">Scissors <br><img src="3.jfif"></button>
+    </div>
+</center>
+    <p id="result"></p>
+
+    <script>
+        const buttons = document.querySelectorAll('button');
+        const resultMessage = document.getElementById('result');
+
+        buttons.forEach((button) => {
+            button.addEventListener('click', () => {
+                const playerChoice = button.id;
+                const computerChoice = getComputerChoice();
+                const result = determineWinner(playerChoice, computerChoice);
+                resultMessage.textContent = `computer chose ${computerChoice}. ${result}`;
+            });
+        });
+
+        function getComputerChoice() {
+            const choices = ['rock', 'paper', 'scissors'];
+            const randomIndex = Math.floor(Math.random() * 3);
+            return choices[randomIndex];
+        }
+
+        function determineWinner(playerChoice, computerChoice) {
+            if (playerChoice === computerChoice) {
+                return "It's a tie!";
+            } else if (
+                (playerChoice === 'rock' && computerChoice === 'scissors') ||
+                (playerChoice === 'paper' && computerChoice === 'rock') ||
+                (playerChoice === 'scissors' && computerChoice === 'paper')
+            ) {
+                return 'You win!';
+            } else {
+                return 'Computer wins!';
+            }
+        }
+    </script>
+</body>
+</html>
